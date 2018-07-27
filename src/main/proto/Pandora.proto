@@ -1,0 +1,14 @@
+syntax="proto3";
+option java_multiple_files = true;
+package pandora;
+
+message Person {
+	string id = 1;
+	bytes audio = 2; 
+}
+
+message PanMessage {
+	string method = 1;
+	repeated string args = 2;
+	repeated Person persons = 3;
+}
