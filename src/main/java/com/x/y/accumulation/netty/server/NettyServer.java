@@ -17,7 +17,7 @@ public class NettyServer {
     private static ServerBootstrap b = new ServerBootstrap();
     
     @Autowired
-    private NettyProtoServerFilter nettyServerFilter;
+    private NettyProtoServerInitializer nettyServerFilter;
     
     
     public void run() {

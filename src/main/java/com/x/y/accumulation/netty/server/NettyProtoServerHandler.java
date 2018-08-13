@@ -9,9 +9,13 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
-
+/**
+ * 接收类型为PanMessage的proto消息
+ * @author zhishen
+ *
+ */
 @Service("nettyServerHandler")
-public class NettyServerHandler extends ChannelInboundHandlerAdapter {
+public class NettyProtoServerHandler extends ChannelInboundHandlerAdapter {
 
     /** 空闲次数 */
     private int idle_count = 1;
@@ -56,11 +60,12 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("第" + count + "次" + ",服务端接受的消息:" + msg);
+        
         try {
             // 如果是protobuf类型的数据
           if (msg instanceof PanMessage) {
-        	   System.out.println("method is :"+((PanMessage) msg).getMethod());
+        	  PanMessage panmsg=(PanMessage) msg;
+        	  System.out.println("method is :"+panmsg.getMethod()+",persons:"+panmsg.getPersonsList());
             } else {
                 System.out.println("未知数据!" + msg);
                 return;
